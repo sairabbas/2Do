@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<body>
+    <h2>Sign up</h2>
+    <form action="" method="POST">
+        <div>
+            {{form.username.label()}}
+            {{form.username(min=4, max=6)}}
+            <br><br>
+        </div>
+        <div>
+            {{form.mail.label()}}
+            {{form.mail()}}<br><br>
+        </div>
+        <div>
+            {{form.password.label()}}
+            {{form.password(min=8)}}<br><br>
+        </div>
+        <div>
+            {{form.confirm_password.label()}}
+            {{form.confirm_password(min=8)}}<br><br>
+        </div>
+        <div>
+            {{form.submit()}}<br><br>
+        </div>
+        <div>
+            <p>Already have an account?
+                <a href="{{url_for('signIn')}}">
+                    Sign In</a></p>
+
+        </div>
+    </form>
+</body>
+{% endblock content %}
