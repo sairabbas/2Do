@@ -2,41 +2,22 @@ from flask import Flask, render_template, redirect, request, flash, redirect
 from form import register, signin
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "AL"
-nameUser = "Anh"
+app.config["SECRET_KEY"] = "2Do"
 
 
 @app.route("/")
-@app.route("/Home")
+@app.route("/home")
 def home():
-    return render_template("home.html", name=nameUser, title="Home")
+    return render_template("home.html", title="Home")
 
-
-@app.route("/about")
-def about():
-    return render_template("about.html", title="About")
-
-
-@app.route("/blog")
-def blog():
-
-    return render_template("blog.html", title=nameUser, post=posts)
-
-
-@app.route("/blog/<string:blog_id>")
-def blogpost(blog_id):
-    return "Blog Post Number " + blog_id
-
-
+# TODO: register and sign in need to input the 2 def validate() on each for checking the account is valid or not (username, email), but it needs database to check the account.
+# register page
 @app.route("/register", methods=["GET", "POST"])
 def signUp():
     form = register()
-    if form.is_submitted():
-        result = request.form
-        return render_template("user.html", result=result)
     return render_template("register.html", form=form, title="Sign Up")
 
-
+# sign in page
 @app.route("/signin", methods=["GET", "POST"])
 def signIn():
     form = signin()
@@ -47,4 +28,3 @@ def signIn():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
