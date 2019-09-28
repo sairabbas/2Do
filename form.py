@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField,, IntegerField, TextAreaField, DateField, TimeField, validators
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Length
 
 
@@ -24,3 +24,11 @@ class signin(FlaskForm):
                              DataRequired(), Length(min=8)])
     rememberUserName = BooleanField("Remember Username")
     submit = SubmitField("Sign in")
+
+class CreateTask(FlaskForm):
+        task_name=StringField('Task Description',[validators.DataRequired()])
+        task_date=DateField('Task Date',[validators.DataRequired()])
+        task_time=TimeField('Task Time',[validators.DataRequired()])   
+        task_notif=BooleanField('Notify')
+        task_save=SubmitField('Save')
+        
