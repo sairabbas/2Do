@@ -25,6 +25,16 @@ def signIn():
         return render_template(redirect(home()))
     return render_template("signin.html", form=form, title="Sign In")
 
+# create task
+@app.route('/tasks', methods=('GET','POST'))
+def tasks():
 
-if __name__ == "__main__":
+    title='Tasks'
+    form = CreateTask()
+    if form.validate_on_submit():
+        return redirect('/home')
+    return render_template('tasks.html',form=form,title=title)
+
+if __name__ == '__main__':
     app.run(debug=True)
+
