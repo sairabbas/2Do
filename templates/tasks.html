@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	<body>
+		<h1>Schedule your task here!</h1>
+	</body>
+
+	
+	<form action="" method="GET","POST">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.task_name.label }} <br>
+			{{ form.task_name() }}
+		</p>
+	</form>
+	
+	
+	<form action="" method="GET","POST">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.task_date.label }} <br>
+			{{ form.task_date() }}
+		</p>
+	</form>
+	
+
+	<form action="" method="GET","POST">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.task_time.label }} <br>
+			{{ form.task_time() }}
+		</p>
+	</form>
+	
+	
+	<form action="" method="GET","POST">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.task_notif.label }} 			
+			{{ form.task_notif() }}
+		</p>
+	</form>
+	
+	
+	<form action="" method="GET","POST">
+		{{ form.hidden_tag() }}
+		<p>
+			{{ form.task_save() }}
+		</p>
+	</form>
+	
+	
+{% endblock %}

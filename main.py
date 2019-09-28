@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, flash, redirect
-from form import register, signin
+from form import register, signin, CreateTask
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "2Do"
