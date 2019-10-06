@@ -3,13 +3,11 @@ from app import app, db
 from app.form import register, signin, CreateTask
 from flask_sqlalchemy import SQLAlchemy
 
-
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("home.html", title="Home")
 
-# TODO: register and sign in need to input the 2 def validate() on each for checking the account is valid or not (username, email), but it needs database to check the account.
 # register page
 @app.route("/register", methods=["GET", "POST"])
 def signUp():
@@ -35,6 +33,8 @@ def tasks():
     form = CreateTask()
     if form.validate_on_submit():
         return redirect('/home')
+    else:
+        return "Username or Password is invalid. Please try again"
     return render_template('tasks.html', form=form, title=title)
 
 
