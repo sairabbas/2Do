@@ -1,7 +1,12 @@
-from flask import render_template, redirect,url_for, flash, redirect, request
+from flask import render_template, redirect, url_for, flash, redirect, request
 from app import app, db
 from app.form import register, signin, CreateTask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_required
+from flask import request
+from werkzeug.urls import url_parse
+from app.form import register
+from app.models import User
 
 @app.route("/")
 @app.route("/home")
@@ -20,9 +25,14 @@ def signUp():
 @app.route("/signin", methods=["GET", "POST"])
 def signIn():
     form = signin()
+
     if form.validate_on_submit():
-        flash("Login requested for %s, remember me %s " %
-              (form.username.data, str(form.remember_me.data)))
+        user = User(username=form.username.data, email=form.email.data)
+        print(user)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        #flash('Login requested for user {}, remember me={}' .format((form.username.data, str(form.remember_me.data))))
         return render_template(redirect(home()))
     return render_template("signin.html", form=form, title="Sign In")
 
