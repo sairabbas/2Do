@@ -1,4 +1,31 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
+
 {% block content %}
-<h1>Welcome</h1>
-{% endblock content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    <div>
+            <h2>Incomplete todo</h2>
+            <br><br>
+            <ul>
+                {% for todo in todos %}
+                    {% if todo.status == False %}
+                    <li><h3> {{ todo.description }}</h3> - {{ todo.deadline }} </li>
+                    <a href="{{ url_for('complete', id = todo.id )}}">Compete</a>
+                    <!-- <button type ="button" data-toggle ='modal', data-target=#deleteModal>Delete</button> -->
+                    <a href="{{ url_for('delete', id = todo.id )}}">Delete</a>
+                    <a href="{{ url_for('edit', id = todo.id )}}">Edit</a>
+                    {% endif %}
+    
+                {% endfor %}
+            </ul>
+            <h2>Complete todo</h2>
+            <br><br>
+            <ul>
+                {% for todo in todos %}
+                {% if todo.status == True  %}
+                <li><h3> {{ todo.description }} </h3> - {{todo.timestamp.strftime('%Y-%m-%d')}} </li>
+                <a href="/delete/{{todo.id }}">Delete</a>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+{% endblock %}
