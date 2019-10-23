@@ -5,6 +5,8 @@ from flask_login import logout_user
 from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
 from app.models import User, Todo
+from datetime import datetime, date, time
+import calendar
 '''
 TODO: 
 1. fix or add the variable  comlumn  into database (models.py) (time)
@@ -13,9 +15,10 @@ TODO:
 Note: You can create account for your own
 '''
 @app.route('/')
-@app.route('/home')
+@app.route('/home/')
 @login_required
 def home():
+    # user = User.query.filter_by(id = id).first_or_404()
     todos = Todo.query.all()
     return render_template('home.html', todos = todos,  title='HOME')
 
@@ -76,16 +79,36 @@ def internal_error(error):
 def add(): 
     form = createTask()
 
-    if form.validate_on_submit():
-        todo = Todo(description = form.description.data, status=False)
+    if request.method == 'POST' :
+        description  = request.form.get('description')
+
+        deadline_date = request.form.get('deadline_date')
+        y, m , d = deadline_date.split('-')
+        deadline_time = request.form.get('deadline_time')
+        h,min = deadline_time.split(':')
+
+        #change the month "word" to  the month "number"
+        dict = {}
+        for mw, mn in enumerate(calendar.month_abbr):
+            dict.update({ mw : mn })
+        for mw, mn  in dict.items():
+            if m == mn:
+                m = mw
+
+
+        deadline_date  = date(int(y), int(m), int(d))
+        deadline_time = time(int(h),int(min))
+
+        todo = Todo(description = description, deadline_date = deadline_date, deadline_time = deadline_time,  status=False)
         db.session.add(todo)
         db.session.commit()
         flash('Successfully to create task!', 'success')
         return redirect(url_for('home'))
-    return render_template('tasks.html',form=form, legend = 'New Tasks', title="add")
+    return render_template('tasks.html', form=form, legend = 'New Tasks', title="add")
 
 #complete tasks
 @app.route('/complete/<int:id>')
+@login_required
 def complete(id): 
     todo = Todo.query.filter_by(id = id).first()
     todo.status = True
@@ -94,26 +117,30 @@ def complete(id):
 
 #delete tasks
 @app.route('/delete/<int:id>')
+@login_required
 def delete(id): 
     todo = Todo.query.filter_by(id=id).first()
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for('home'))
 @app.route('/edit/<int:id>', methods=['GET','POST'])
+@login_required
 def edit(id): 
     todo = Todo.query.filter_by(id = id).first()
     form = createTask()
-    if  form.validate_on_submit(): 
+    if request.method == 'POST':
         todo.description = form.description.data
+        todo.deadline_date = form.deadline_date.data
+        todo.deadline_time = form.deadline_time.data
         db.session.commit()
-        # todo.deadline = form.deadline.data
         flash('Updated Successfully', 'success')
-        return redirect(url_for('home', id = id))
+        return redirect(url_for('home'))
     elif request.method == 'GET':
-        form.description.data = todo.description
-        form.status.data = todo.status
-        # form.deadline.data = todo.deadline
-    return render_template('tasks.html', title='Edit', legend = 'Edit Tasks', form= form)
+            form.description.data = todo.description
+            form.status.data = todo.status
+            form.deadline_date.data = todo.deadline_date
+            form.deadline_time.data = todo.deadline_time
+    return render_template('tasks.html', title='Edit', legend = 'Edit Tasks', form =form, todo = todo)
 
 if __name__ == '__main__':
     db.create_all()

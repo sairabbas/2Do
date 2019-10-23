@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	<h1>Schedule your task here!</h1>
+	<br><br>
+		<form action="" method="post" name="add">
+			{{ form.hidden_tag() }}
+            <legend>{{ legend }} </legend>
+            {% if legend ==  'Edit Tasks' %}
+				<div class="form-group">
+						<input type="text" class ="form-control" name="description" placeholder="Description" value = {{todo.description}} required >
+						<input type="date" class="form-control"  name="deadline_date" placeholder="Date" value = {{todo.deadline_date}} required >
+                        <input type="time" class="form-control"  name="deadline_time" placeholder="Time" value = {{todo.deadline_time}} required>
+                </div>
+            {% else %}
+            <div class="form-group">
+                    <input type="text" class ="form-control" name="description" placeholder="Description"  required >
+                    {% for error in form.description.errors %}
+                    <span  class='errorSISU'>{{ error }}</span>
+                    {% endfor %}
+                    <input type="date" class="form-control"  name="deadline_date" placeholder="Date"  required >
+                    <input type="time" class="form-control"  name="deadline_time" placeholder="Time" required>
+            </div>
+            {% endif %}
+
+			
+				</div>
+					  <br><br> 
+				<div>
+					<button>Save</button>
+					
+					<br><br><br>
+				</div>
+		</form>
+
+
+{% endblock content %}
