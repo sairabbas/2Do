@@ -4,13 +4,13 @@
 
     <h1>Hi, {{ current_user.username }}!</h1>
     <div>
-            <h2>Incomplete todo</h2>
+            <h2>Unfinished tasks</h2>
             <br><br>
             <ul>
                 {% for todo in todos %}
                     {% if todo.status == False %}
                     <li><h3> {{ todo.description }}</h3> - {{ todo.deadline_date }} and {{todo.deadline_time}} </li>
-                    <a href="{{ url_for('complete', id = todo.id )}}">Completed</a>
+                    <a href="{{ url_for('complete', id = todo.id )}}">Complete</a>
                     <!-- <button type ="button" data-toggle ='modal', data-target=#deleteModal>Delete</button> -->
                     <a href="{{ url_for('delete', id = todo.id )}}">Delete</a>
                     <a href="{{ url_for('edit', id = todo.id )}}">Edit</a>
@@ -18,7 +18,7 @@
     
                 {% endfor %}
             </ul>
-            <h2>Unfinished tasks</h2>
+            <h2>Finished tasks</h2>
             <br><br>
             <ul>
                 {% for todo in todos %}
