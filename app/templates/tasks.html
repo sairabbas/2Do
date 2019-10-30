@@ -8,15 +8,15 @@
             <legend>{{ legend }} </legend>
             {% if legend ==  'Edit Tasks' %}
 				<div class="form-group">
-						<input type="text" class ="form-control" name="description" placeholder="Description" value = {{todo.description}} required >
-						<input type="date" class="form-control"  name="deadline_date" placeholder="Date" value = {{todo.deadline_date}} required >
-                        <input type="time" class="form-control"  name="deadline_time" placeholder="Time" value = {{todo.deadline_time}} required>
+						<input type="text" class ="form-control" name="description" placeholder="Description" value ={{todo.description}} required >
+						<input type="datetime-local" class="form-control"  name="deadline" placeholder="Date" value={{u}} required >
+            <!-- <input type="date" class="form-control"  name="deadline_time" placeholder="Time" value = {{todo.deadline.date}} required>  -->
                 </div>
             {% else %}
             <div class="form-group">
                     <input type="text" class ="form-control" name="description" placeholder="Description"  required >
-                    <input type="date" class="form-control"  name="deadline_date" placeholder="Date"  required >
-                    <input type="time" class="form-control"  name="deadline_time" placeholder="Time" required>
+                    <input type="datetime-local" class="form-control"  name="deadline" placeholder="Date"  required >
+                    <!-- <input type="time" class="form-control"  name="deadline_time" placeholder="Time" required> -->
             </div>
             {% endif %}
 
@@ -32,13 +32,4 @@
 
 
 {% endblock content %}
-<!-- {% block scripts %}
-  {{ super() }}
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $('#datepick').datetimepicker();
-    });
-  </script>
-{% endblock %} -->
+

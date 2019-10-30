@@ -5,22 +5,13 @@ from flask_login import logout_user
 from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
 from app.models import User, Todo
-from datetime import datetime, date, time
-import calendar
-'''
-TODO: 
-1. fix or add the variable  comlumn  into database (models.py) (time)
-3. create DB for friends of the users (models.db), email, design page (html, css)
-4. function share by email
-Note: You can create account for your own
-'''
+from app.function import transformForm
 @app.route('/')
-@app.route('/home/')
+@app.route('/home')
 @login_required
 def home():
-    # user = User.query.filter_by(id = id).first_or_404()
-    todos = Todo.query.all()
-    return render_template('home.html', todos = todos,  title='HOME')
+    todo = Todo.query.all()
+    return render_template('home.html', todo=todo,  title='HOME')
 
 @app.route('/login')
 @app.route('/login', methods=['GET', 'POST'])
@@ -73,6 +64,8 @@ def internal_error(error):
     db.session.rollback() # all objects are expired
     return render_template('500.html'),500
 
+
+
 #add tasks
 @app.route('/add', methods =['GET','POST'])
 @login_required
@@ -81,30 +74,17 @@ def add():
 
     if request.method == 'POST' :
         description  = request.form.get('description')
-
-        deadline_date = request.form.get('deadline_date')
-        y, m , d = deadline_date.split('-')
-        deadline_time = request.form.get('deadline_time')
-        h,min = deadline_time.split(':')
-
-        #change the month "word" to  the month "number"
-        dict = {}
-        for mw, mn in enumerate(calendar.month_abbr):
-            dict.update({ mw : mn })
-        for mw, mn  in dict.items():
-            if m == mn:
-                m = mw
-
-
-        deadline_date  = date(int(y), int(m), int(d))
-        deadline_time = time(int(h),int(min))
-
-        todo = Todo(description = description, deadline_date = deadline_date, deadline_time = deadline_time,  status=False)
+        # get the value of datetime in the form of html and then change the HTML's format to DB's format
+        deadline = request.form.get('deadline')
+        deadline = transformForm(deadline)
+        todo = Todo(description = description, deadline = deadline,  status=False, user=current_user._get_current_object())
         db.session.add(todo)
         db.session.commit()
+        db.session.query(Todo)
         flash('Successfully to create task!', 'success')
         return redirect(url_for('home'))
-    return render_template('tasks.html', form=form, legend = 'New Tasks', title="add")
+        # posts = Todo.query.order_by(Todo.timestamp.desc()).all()
+    return render_template('tasks.html',form=form, legend = 'New Tasks', title="add")
 
 #complete tasks
 @app.route('/complete/<int:id>')
@@ -128,19 +108,17 @@ def delete(id):
 def edit(id): 
     todo = Todo.query.filter_by(id = id).first()
     form = createTask()
+    u = todo.deadline.strftime('%Y-%m-%dT%H:%M') #reformat the db to html
     if request.method == 'POST':
-        todo.description = form.description.data
-        todo.deadline_date = form.deadline_date.data
-        todo.deadline_time = form.deadline_time.data
-        db.session.commit()
-        flash('Updated Successfully', 'success')
-        return redirect(url_for('home'))
-    elif request.method == 'GET':
-            form.description.data = todo.description
-            form.status.data = todo.status
-            form.deadline_date.data = todo.deadline_date
-            form.deadline_time.data = todo.deadline_time
-    return render_template('tasks.html', title='Edit', legend = 'Edit Tasks', form =form, todo = todo)
+            todo.description = request.form.get('description')
+            deadline =  request.form.get('deadline')
+            todo.status = form.status.data 
+            deadline = transformForm(deadline)
+            todo.deadline = deadline
+            db.session.commit()
+            flash('Updated Successfully', 'success')
+            return redirect(url_for('home'))
+    return render_template('tasks.html', title='Edit', legend = 'Edit Tasks',u=u, form =form, todo = todo)
 
 if __name__ == '__main__':
     db.create_all()

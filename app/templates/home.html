@@ -2,14 +2,14 @@
 
 {% block content %}
 
-    <h1>Hi, {{ current_user.username }}!</h1>
+    <h1>Hi, {{current_user.username }}!</h1>
     <div>
             <h2>Unfinished tasks</h2>
             <br><br>
             <ul>
-                {% for todo in todos %}
-                    {% if todo.status == False %}
-                    <li><h3> {{ todo.description }}</h3> - {{ todo.deadline_date }} and {{todo.deadline_time}} </li>
+                {% for todo in todo %}
+                    {% if todo.status == False  and todo.user_id == current_user.id %}
+                    <li><h3> {{ todo.description }}</h3>  {{ todo.deadline }}</li> 
                     <a href="{{ url_for('complete', id = todo.id )}}">Complete</a>
                     <!-- <button type ="button" data-toggle ='modal', data-target=#deleteModal>Delete</button> -->
                     <a href="{{ url_for('delete', id = todo.id )}}">Delete</a>
@@ -21,8 +21,8 @@
             <h2>Finished tasks</h2>
             <br><br>
             <ul>
-                {% for todo in todos %}
-                {% if todo.status == True  %}
+                {% for todo in todo %}
+                {% if todo.status == True and todo.user_id == current_user.id  %}
                 <li><h3> {{ todo.description }} </h3> - {{todo.timestamp}}</li>
                 <a href="/delete/{{todo.id }}">Delete</a>
                 {% endif %}

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField,BooleanField, IntegerField, TextAreaField, DateField, TimeField, validators
+from wtforms import StringField, PasswordField, SubmitField,BooleanField, IntegerField,  TextAreaField, DateField, TimeField, validators, DateTimeField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Length, ValidationError
 from app.models import User, Todo
 class signin(FlaskForm):
@@ -39,8 +39,9 @@ class register(FlaskForm):
 
 class createTask(FlaskForm):
     description = StringField("description", validators=[DataRequired(), Length(min=4)])
-    deadline_date = DateField("deadline", validators=[DataRequired()])
-    deadline_time = TimeField("time", validators=[DataRequired()])
+    # deadline_date = DateField("deadline", validators=[DataRequired()])
+    # deadline_time = TimeField("time", validators=[DataRequired()])
+    deadline = DateTimeField("deadline", validators= [DataRequired()])
     status = BooleanField("status", default=False)
     submit = SubmitField('save')
 
