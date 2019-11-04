@@ -30,11 +30,9 @@ class User(UserMixin,  db.Model):
 
 class Todo(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    # title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(250), nullable = False)
+    description = db.Column(db.String(250),index =True, nullable = False)
+    content = db.Column(db.UnicodeText, index =True)
     timestamp = db.Column(db.DateTime, index =True,  default=datetime.utcnow)
-    # deadline_date = db.Column(db.Date, index = True, nullable = False)
-    # deadline_time = db.Column(db.Time, index = True, nullable = False)
     deadline = db.Column(db.DateTime, index = True, nullable = False)
     status = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

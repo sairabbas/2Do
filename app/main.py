@@ -74,10 +74,11 @@ def add():
 
     if request.method == 'POST' :
         description  = request.form.get('description')
+        content = request.form.get('content')
         # get the value of datetime in the form of html and then change the HTML's format to DB's format
         deadline = request.form.get('deadline')
         deadline = transformForm(deadline)
-        todo = Todo(description = description, deadline = deadline,  status=False, user=current_user._get_current_object())
+        todo = Todo(description = description, content = content, deadline = deadline,  status=False, user=current_user._get_current_object())
         db.session.add(todo)
         db.session.commit()
         db.session.query(Todo)
@@ -111,6 +112,7 @@ def edit(id):
     u = todo.deadline.strftime('%Y-%m-%dT%H:%M') #reformat the db to html
     if request.method == 'POST':
             todo.description = request.form.get('description')
+            todo.content =  request.form.get('content')
             deadline =  request.form.get('deadline')
             todo.status = form.status.data 
             deadline = transformForm(deadline)

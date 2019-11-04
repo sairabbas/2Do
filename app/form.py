@@ -39,8 +39,7 @@ class register(FlaskForm):
 
 class createTask(FlaskForm):
     description = StringField("description", validators=[DataRequired(), Length(min=4)])
-    # deadline_date = DateField("deadline", validators=[DataRequired()])
-    # deadline_time = TimeField("time", validators=[DataRequired()])
+    content = TextAreaField('content')
     deadline = DateTimeField("deadline", validators= [DataRequired()])
     status = BooleanField("status", default=False)
     submit = SubmitField('save')
