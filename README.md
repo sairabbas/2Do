@@ -13,7 +13,9 @@ The following features are implemented:
 
 - [x] User can register
 - [x] User can login
-- [x] 
-- [x] User can scroll through a list of movies currently playing in theaters from The Movie DB API (+5pt)
-- [x] User can "Pull to refresh" the movie list (+2pt)
-- [x] User sees a loading state while waiting for the movies to load (+2pt)
+- [x] User can create a task
+- [x] User can edit a task
+- [x] User can delete a task
+- [x] Application side the database is securely contains user information
+- [x] User interface is designed using bootstrap.
+
