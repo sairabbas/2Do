@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField,BooleanField, IntegerField,  TextAreaField, DateField, TimeField, validators, DateTimeField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Length, ValidationError
 from app.models import User, Todo
+from wtforms.fields.html5 import EmailField
 class signin(FlaskForm):
     username = StringField(
         "Username", validators=[DataRequired(), Length(min=4, max=10)]
