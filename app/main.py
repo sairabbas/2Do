@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, flash, request
 from app import app, db
-from app.form import signin, register, createTask
+from app.form import signin, register, createTask, createList
 from flask_login import logout_user
 from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
@@ -65,6 +65,13 @@ def internal_error(error):
     db.session.rollback() # all objects are expired
     return render_template('500.html'),500
 
+#list page
+@app.route('/newList')
+@login_required
+def newList():
+    form = createList()
+    name = request.form.get('name')
+    return render_template('newList.html',form=form)
 
 
 #add tasks
