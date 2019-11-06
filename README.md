@@ -17,8 +17,8 @@ The following features are implemented:
 - [x] User can edit a task
 - [x] User can delete a task
 - [x] User can create a new list
-- [x] Application side the database is securely contains user information
-- [x] User interface is designed using bootstrap.
+- [x] Application side the database securely contains user information
+- [x] User interface designed using bootstrap.
 
 ## How to get started!
 
