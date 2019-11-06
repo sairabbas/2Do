@@ -30,10 +30,10 @@ Run the command on terminal
     
 Or Directly Download the project onto your local computer by clicking the Clone or Download button on the top right.
 
-Change directory to the downloaded folder. Then run the commands:
+Change directory to the downloaded folder. Then run the commands on terminal:
         
-        export FLASK_APP=myApp.py
-        flask run
+    export FLASK_APP=myApp.py
+    flask run
 
 Alternative method is to use pycharm. Then run the command on the terminal in PyCharm:
 
