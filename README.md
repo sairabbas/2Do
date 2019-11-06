@@ -21,16 +21,15 @@ The following features are implemented:
 
 ## How to get started!
 
-Required Software:
+Required Software: PyCharm CE, Python3
 
-Pycharm
-Python3
+Run the command on terminal
 
     git clone git@github.com:hamsikapongubala/CMPE131.git
     
-Or Directly Download the project onto your local computer by clicking the Clone or Download.
+Or Directly Download the project onto your local computer by clicking the Clone or Download button on the top right.
 
-Open project in pycharm and in terminal run the command 
+Open project in pycharm. Then run the command:
 
     flask run
     
