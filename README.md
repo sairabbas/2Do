@@ -16,6 +16,7 @@ The following features are implemented:
 - [x] User can create a task
 - [x] User can edit a task
 - [x] User can delete a task
+- [x] User can create a new list
 - [x] Application side the database is securely contains user information
 - [x] User interface is designed using bootstrap.
 
@@ -29,7 +30,12 @@ Run the command on terminal
     
 Or Directly Download the project onto your local computer by clicking the Clone or Download button on the top right.
 
-Open project in pycharm. Then run the command:
+Change directory to the downloaded folder. Then run the commands:
+        
+        export FLASK_APP=myApp.py
+        flask run
+
+Alternative method is to use pycharm. Then run the command on the terminal in PyCharm:
 
     flask run
     
