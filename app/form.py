@@ -47,3 +47,6 @@ class createTask(FlaskForm):
     submit = SubmitField('save')
 
 
+class createList(FlaskForm):
+    name = StringField("name",validators=[DataRequired()])
+    submit = SubmitField('save')
