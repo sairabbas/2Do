@@ -19,3 +19,6 @@ The following features are implemented:
 - [x] Application side the database is securely contains user information
 - [x] User interface is designed using bootstrap.
 
+## How to get started!
+
+
