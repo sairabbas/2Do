@@ -30,11 +30,17 @@ class User(UserMixin,  db.Model):
 
 class Todo(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    #title to the task
     description = db.Column(db.String(250),index =True, nullable = False)
+    # content to the task
     content = db.Column(db.UnicodeText, index =True)
+    # time task created
     timestamp = db.Column(db.DateTime, index =True,  default=datetime.utcnow)
+    # time deadline to the task
     deadline = db.Column(db.DateTime, index = True, nullable = False)
+    # the status of the task finished or not
     status = db.Column(db.Boolean, default=False)
+    # linking to the user id
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     def __repr__(self):
         return '<Todo {}>'.format(self.description)
