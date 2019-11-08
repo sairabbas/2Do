@@ -90,12 +90,11 @@ def add():
         todo = Todo(description = description, content = content, deadline = deadline,  status=False, user=current_user._get_current_object())
         db.session.add(todo)
         db.session.commit()
-<<<<<<< HEAD
         db.session.query(Todo)
         flash('Task successfully created!', 'success')
-=======
+
         flash('Successfully to create task!', 'success')
->>>>>>> 7b1906f6d7612ed5df171950267a6e997053f323
+
         return redirect(url_for('home'))
         # posts = Todo.query.order_by(Todo.timestamp.desc()).all()
     return render_template('tasks.html',form=form, legend = 'New Tasks', title="add")
