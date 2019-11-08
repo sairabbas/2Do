@@ -1,5 +1,30 @@
-.errorSISU
-{
-    color: red;
-    font-weight: bold; 
+/* for the layout */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-brand {
+  font-family: "Sedgwick Ave Display", cursive;
+  font-size: 50px;
+  color: whitesmoke;
+}
+
+.navbar-dark .nav-item .nav-link:hover {
+  background: whitesmoke;
+  color: black;
+}
+main {
+  position: relative;
+  background: url("images//pexels-photo-261579.jpeg");
+  background-size: cover;
+  background-position: center;
+  padding: 50px 0 260px;
+}
+/* for the sign in */
+.word {
+  color: #00ffff;
+}
+h2 {
+  color: #00ffff;
 }

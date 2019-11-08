@@ -82,14 +82,19 @@ def add():
 
     if request.method == 'POST' :
         description  = request.form.get('description')
+        content = request.form.get('content')
         # get the value of datetime in the form of html and then change the HTML's format to DB's format
         deadline = request.form.get('deadline')
         deadline = transformForm(deadline)
-        todo = Todo(description = description, deadline = deadline,  status=False, user=current_user._get_current_object())
+        # inserting the inputs to the database
+        todo = Todo(description = description, content = content, deadline = deadline,  status=False, user=current_user._get_current_object())
         db.session.add(todo)
         db.session.commit()
         db.session.query(Todo)
         flash('Task successfully created!', 'success')
+
+        flash('Successfully to create task!', 'success')
+
         return redirect(url_for('home'))
         # posts = Todo.query.order_by(Todo.timestamp.desc()).all()
     return render_template('tasks.html',form=form, legend = 'New Tasks', title="add")
@@ -119,6 +124,7 @@ def edit(id):
     u = todo.deadline.strftime('%Y-%m-%dT%H:%M') #reformat the db to html
     if request.method == 'POST':
             todo.description = request.form.get('description')
+            todo.content =  request.form.get('content')
             deadline =  request.form.get('deadline')
             todo.status = form.status.data 
             deadline = transformForm(deadline)

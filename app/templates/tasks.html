@@ -1,22 +1,30 @@
 {% extends 'layout.html' %}
-
 {% block content %}
 	<h1>Schedule your task here!</h1>
 	<br><br>
 		<form action="" method="post" name="add">
 			{{ form.hidden_tag() }}
             <legend>{{ legend }} </legend>
-            {% if legend ==  'Edit Tasks' %}
+			{% if legend ==  'Edit Tasks' %}
+			<!-- this is for edit function -->
 				<div class="form-group">
 						<input type="text" class ="form-control" name="description" placeholder="Description" value ={{todo.description}} required >
+						<br><br>
+						<textarea name="content" placeholder="Content" contenteditable="true"> {{ todo.content }}</textarea>
+						<br><br>
 						<input type="datetime-local" class="form-control"  name="deadline" placeholder="Date" value={{u}} required >
-            <!-- <input type="date" class="form-control"  name="deadline_time" placeholder="Time" value = {{todo.deadline.date}} required>  -->
+
+
                 </div>
-            {% else %}
+			{% else %}
+			<!-- this is for create task function -->
             <div class="form-group">
-                    <input type="text" class ="form-control" name="description" placeholder="Description"  required >
+					<input type="text" class ="form-control" name="description" placeholder="Description"  required >
+					<br><br>
+					<textarea name="content" placeholder="Content" ></textarea>
+					<br><br>
                     <input type="datetime-local" class="form-control"  name="deadline" placeholder="Date"  required >
-                    <!-- <input type="time" class="form-control"  name="deadline_time" placeholder="Time" required> -->
+                   
             </div>
             {% endif %}
 
