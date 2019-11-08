@@ -6,6 +6,7 @@ from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
 from app.models import User, Todo
 from app.function import transformForm
+
 @app.route('/')
 @app.route('/home')
 @login_required
