@@ -30,7 +30,10 @@
             <ul>
                 {% for todo in todo %}
                     {% if todo.status == False  and todo.user_id == current_user.id %}
-                    <li><h3> {{ todo.description }}</h3>  {{ todo.deadline }}</li> 
+                    <li><h3> {{ todo.description }}</h3>  
+                        {{todo.content}}
+                        <br>
+                        {{ todo.deadline }}</li> 
                     <a href="{{ url_for('complete', id = todo.id )}}">Complete</a>
                     <!-- <button type ="button" data-toggle ='modal', data-target=#deleteModal>Delete</button> -->
                     <a href="{{ url_for('delete', id = todo.id )}}">Delete</a>
