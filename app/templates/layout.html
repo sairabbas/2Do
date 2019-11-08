@@ -11,36 +11,9 @@
 		<title>2DO - {{title}} </title>
 	{% else %}
 		<title>2DO</title>
-<<<<<<< HEAD
 		{% endif  %}
 	</head>
-	<body>
-		<header>
-			<nav>
-				<ul class="nav justify-content-end navbar navbar-light" style="background-color: #e3f2fd;">
-							{% if current_user.is_anonymous %}
-								<li class="nav-item">
-										<a class="nav-link" href="{{url_for("login")}}">Sign In</a>
-								</li>
-								<li class="nav-item">
-										<a class="nav-link" href="{{url_for("signUp")}}">Sign Up</a>
-								</li>
-							{% else %}
-								<li class="nav-item">
-									<a class="nav-link active" href="{{url_for("home", username=current_user.username)}}">Home</a>
-								</li>
-								<li class="nav-item">
-										<a class="nav-link" href="{{url_for("logout")}}">Log Out</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="{{url_for("add")}}">Add Tasks</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="{{url_for("newList")}}">Add List</a>
-								</li>
-=======
-	{% endif  %}
-</head>
+	
 <body >
     <header>
         <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
@@ -68,7 +41,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url_for("add")}}">Add Tasks</a>
                     </li>
->>>>>>> 7b1906f6d7612ed5df171950267a6e997053f323
 
                     {% endif %}
                 </ul>
