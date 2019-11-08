@@ -5,7 +5,7 @@ Alvin Huang, Anh Le, Hamsika Pongubala, Sair Abbas
 
 ## About the App:
 
-2Do is a task management application, which will allow users to mangae their daily task with ease. The app will allow users to enter their daily tasks, set notification timings, create new to do lists, and share their tasks with other 2Do users! Our hope is that managing your daily schedule becomes easier.
+2Do is a task management application, which will allow users to manage their daily task with ease. The app will allow users to enter their daily tasks, set notification timings, create new to do lists, and share their tasks with other 2Do users! Our hope is that managing your daily schedule becomes easier.
 
 ## Features
 
