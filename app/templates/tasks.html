@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
-
 {% block content %}
 	<h1>Schedule your task here!</h1>
 	<br><br>
 		<form action="" method="post" name="add">
 			{{ form.hidden_tag() }}
             <legend>{{ legend }} </legend>
-            {% if legend ==  'Edit Tasks' %}
+			{% if legend ==  'Edit Tasks' %}
+			<!-- this is for edit function -->
 				<div class="form-group">
 						<input type="text" class ="form-control" name="description" placeholder="Description" value ={{todo.description}} required >
 						<br><br>
@@ -16,7 +16,8 @@
 
 
                 </div>
-            {% else %}
+			{% else %}
+			<!-- this is for create task function -->
             <div class="form-group">
 					<input type="text" class ="form-control" name="description" placeholder="Description"  required >
 					<br><br>
