@@ -17,27 +17,25 @@
 </head>
 
 <body>
-    <h1>Welcome, {{ current_user.username }}!</h1>
+    <h1 class="text-light">Welcome, {{ current_user.username }}!</h1>
     <br><br>
     <div class="row justify-content-center">
         <!-- Bootstrap grid is 12 units in total, here i'm splitting one row into 2 columns of 6 units each -->
         <!-- Imagine it like this: |  6 units |  6 units | -->
         <div class="col-md-6 text-center">
-            <h2>Unfinished tasks</h2>
+            <h2 class="text-light">Unfinished tasks</h2>
             <p>
-
-            <br><br>
             <ul>
                 {% for todo in todo %}
                     {% if todo.status == False  and todo.user_id == current_user.id %}
-                    <li><h3> {{ todo.description }}</h3>  
+                    <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"><h3 class="text-light"> {{ todo.description }}</h3>
                         {{todo.content}}
                         <br>
-                        {{ todo.deadline }}</li> 
+                        {{ todo.deadline }}
                     <a href="{{ url_for('complete', id = todo.id )}}">Complete</a>
                     <!-- <button type ="button" data-toggle ='modal', data-target=#deleteModal>Delete</button> -->
                     <a href="{{ url_for('delete', id = todo.id )}}">Delete</a>
-                    <a href="{{ url_for('edit', id = todo.id )}}">Edit</a>
+                    <a href="{{ url_for('edit', id = todo.id )}}">Edit</a></li>
                     {% endif %}
 
                 {% endfor %}
@@ -45,17 +43,15 @@
             </p>
         </div>
         <div class="col-md-6 text-center">
-             <h2>Finished tasks</h2>
+             <h2 class="text-light">Finished tasks</h2>
             <p>
-            <br><br>
-            <ul>
                 {% for todo in todo %}
                 {% if todo.status == True and todo.user_id == current_user.id  %}
-                <li><h3> {{ todo.description }} </h3> - {{todo.timestamp}}</li>
-                <a href="/delete/{{todo.id }}">Delete</a>
+                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"><h3 class="text-light"> {{ todo.description }} </h3> - {{todo.timestamp}}
+                <a href="/delete/{{todo.id }}">Delete</a></li>
                 {% endif %}
                 {% endfor %}
-            </ul>
+
             </p>
         </div>
     </div>
