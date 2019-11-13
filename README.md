@@ -61,4 +61,16 @@ On the top right corner there is a create a task tab, which will redirect you to
 
 ### Edit a task
 
-On clicking the edit a task link on an exisiting task user can edit the description, content, and notification date.
+On clicking the edit a task link on an exisiting task, the user can edit the description, content, and notification date. The updates will then be updated home page under the 'unfinished tasks' list.
+
+### Delete a task
+
+On clicking the delete link on an exisiting task, the user can delete the task. This option is not reversible and the task will be removed from the users list entirely.
+
+### Database
+
+The database containing user login information, user tasks, and lists are currently being stored on the database. This enables the user login to their home page and have their information associated with their account only. 
+
+### Bootstrap
+
+The styling of all the webpages was done using bootstrap and CSS.
