@@ -22,7 +22,7 @@ The following features are implemented:
 
 ## How to get started!
 
-Required Software: PyCharm CE, Python3
+Required Software: PyCharm CE, Python3, Google Chrome
 
 Run the command on terminal
 
@@ -38,5 +38,27 @@ Change directory to the downloaded folder. Then run the commands on terminal:
 Alternative method is to use pycharm. Then run the command on the terminal in PyCharm:
 
     flask run
-    
+
+A url will be created for you to run locally on your computer, use this url on your web browser:
+
+    Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
 Register yourself as a user and start using 2Do!
+
+## How to verify features:
+
+### Register
+
+To access the application a user must register themselves. By clicking the sign up now button on the bottom sign in page will redirect them to the register page. Users can register as a new user with a username, password, and an email. 
+
+### Login 
+
+After registering as a user, users can login in with the same credentials. This can allow the users to access the app with their finished and unfinished tasks lists, associated with their account.
+
+### Create a Task
+
+On the top right corner there is a create a task tab, which will redirect you to a page to add a new task                  with a title, content description, and due date. Creating a task will add the task to the users 'unfinished tasks' list.
+
+### Edit a task
+
+On clicking the edit a task link on an exisiting task user can edit the description, content, and notification date.
