@@ -67,6 +67,10 @@ On clicking the edit a task link on an exisiting task, the user can edit the des
 
 On clicking the delete link on an exisiting task, the user can delete the task. This option is not reversible and the task will be removed from the users list entirely.
 
+### Create a list
+
+On clicking the create a list tab on the navigation bar, the user will be redirected to a webpage to insert the list title. This allows the user to create a list on the homepage other than the default 'unfinished tasks' and 'finished tasks'.
+
 ### Database
 
 The database containing user login information, user tasks, and lists are currently being stored on the database. This enables the user login to their home page and have their information associated with their account only. 
