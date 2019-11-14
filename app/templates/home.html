@@ -1,22 +1,21 @@
 
 {% extends "layout.html" %}
 {% block content %}
-<!doctype html>
-<html lang="en">
+<!-- <!doctype html>
+<html lang="en"> -->
 
-<head>
+<!-- <head> -->
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>page split tutorial</title>
-</head>
-
-<body>
+</head> -->
+    <div class='main'>
     <h1 class="text-light">Welcome, {{ current_user.username }}!</h1>
     <br><br>
     <div class="row justify-content-center">
@@ -56,6 +55,17 @@
         </div>
     </div>
 
+    <div class="col-md-6 text-center">
+        <h2 class="text-light"> New List</h2>
+        <p>
+            <ul>
+                {% for newlist in newlist %}
+                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"> {{ newlist.name }}</li>
+                {% endfor %}
+            </ul>
+        </p>
+    </div>
+    </div>
 
 
 
@@ -70,9 +80,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-</body>
+<!-- </body>
 
-</html>
+</html> -->
 
 
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<div class='main'>
   <h2>Sign Up</h2>
-  <br><br>
+  <br>
    <form action="" method="post" name="signUp" >
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -12,7 +13,7 @@
           <span  class='errorSISU'>{{ error }}</span>
         {% endfor %}
     </div>
-    <br><br>
+    <br>
     <div class="form-group">
       {{form.password.label(class="form-control-label word")}}
       {{ form.password(class="form-control form-control-lg")}}
@@ -20,7 +21,7 @@
           <span  class='errorSISU'>{{ error }}</span>
         {% endfor %}
     </div>
-        <br><br>
+        <br>
         <div class="form-group">
           {{form.confirm_password.label(class="form-control-label word")}}
           {{ form.confirm_password(class="form-control form-control-lg")}}
@@ -28,7 +29,7 @@
               <span  class='errorSISU'>{{ error }}</span>
             {% endfor %}
         </div>
-            <br><br>
+            <br>
             <div class="form-group">
               {{form.email.label(class="form-control-label word")}}
               {{ form.email(class="form-control form-control-lg")}}
@@ -46,4 +47,5 @@
   </div>
     </form>
   </div>
+</div>
 {% endblock content %}

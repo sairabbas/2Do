@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
 }
-
 .navbar-brand {
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 50px;
@@ -11,15 +10,18 @@
 }
 
 .navbar-dark .nav-item .nav-link:hover {
-  background: whitesmoke;
-  color: black;
+  background: black;
+  color: white;
 }
-main {
+body {
   position: relative;
   background: url("images//pexels-photo-261579.jpeg");
-  background-size: cover;
-  background-position: center;
-  padding: 50px 0 260px;
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+.main {
+  padding: 100px 20px 50px;
+  overflow: hidden;
 }
 /* for the sign in */
 .word {

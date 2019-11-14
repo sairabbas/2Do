@@ -4,7 +4,7 @@ from app.form import signin, register, createTask, createList
 from flask_login import logout_user
 from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
-from app.models import User, Todo
+from app.models import User, Todo, newList
 from app.function import transformForm
 
 @app.route('/')
@@ -12,7 +12,8 @@ from app.function import transformForm
 @login_required
 def home():
     todo = Todo.query.all()
-    return render_template('home.html', todo=todo,  title='HOME')
+    newlist = newList.query.all()
+    return render_template('home.html', todo=todo, newlist=newlist,   title='HOME')
 
 @app.route('/login')
 @app.route('/login', methods=['GET', 'POST'])
@@ -66,12 +67,18 @@ def internal_error(error):
     return render_template('500.html'),500
 
 #list page
-@app.route('/newList')
+@app.route('/newList',methods =['GET','POST'])
 @login_required
-def newList():
+def newlist():
     form = createList()
-    name = request.form.get('name')
-    return render_template('newList.html',form=form)
+    if request.method == 'POST': 
+        name = request.form.get('name')
+        newname = newList(name=name,  user=current_user._get_current_object())
+        db.session.add(newname)
+        db.session.commit()
+        flash('List successfully created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('list.html', form = form, title="New List")
 
 
 #add tasks
@@ -90,7 +97,6 @@ def add():
         todo = Todo(description = description, content = content, deadline = deadline,  status=False, user=current_user._get_current_object())
         db.session.add(todo)
         db.session.commit()
-        db.session.query(Todo)
         flash('Task successfully created!', 'success')
 
        # flash('Successfully to create task!', 'success')

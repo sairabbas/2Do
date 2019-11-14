@@ -2,7 +2,7 @@
 {% block content %}
 	<h1>Schedule your task here!</h1>
 	<br><br>
-		<form action="" method="post" name="add">
+		<form action="" method="post" name="add" class='main'>
 			{{ form.hidden_tag() }}
             <legend>{{ legend }} </legend>
 			{% if legend ==  'Edit Tasks' %}
@@ -37,7 +37,5 @@
 					<br><br><br>
 				</div>
 		</form>
-
-
 {% endblock content %}
 
