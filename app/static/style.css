@@ -13,15 +13,18 @@
   background: black;
   color: white;
 }
-body {
+body{
   position: relative;
-  background: url("images//pexels-photo-261579.jpeg");
-  background-size: auto;
+  background: url("images/black-background-bulb-close-up-716398.jpg");
+  background-size: 100% 200%;
   background-repeat: no-repeat;
 }
 .main {
-  padding: 100px 20px 50px;
+  padding: 10% 20% 30%;
   overflow: hidden;
+}
+.mainHome {
+  padding: 10% 10% 30%;
 }
 /* for the sign in */
 .word {
@@ -29,4 +32,13 @@ body {
 }
 h2 {
   color: #00ffff;
+}
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 10%;
+}
+.close:hover {
+  background: black;
+  color: white;
 }

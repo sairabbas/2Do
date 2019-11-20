@@ -1,89 +1,123 @@
-
 {% extends "layout.html" %}
 {% block content %}
-<!-- <!doctype html>
-<html lang="en"> -->
 
-<!-- <head> -->
-    <!-- Required meta tags -->
-    <!-- <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>page split tutorial</title>
-</head> -->
-    <div class='main'>
+<body  class="mainHome">
     <h1 class="text-light">Welcome, {{ current_user.username }}!</h1>
-    <br><br>
-    <div class="row justify-content-center">
+    <div class="row ">
         <!-- Bootstrap grid is 12 units in total, here i'm splitting one row into 2 columns of 6 units each -->
         <!-- Imagine it like this: |  6 units |  6 units | -->
-        <div class="col-md-6 text-center">
+        <div class="col-md-4 text-center">
             <h2 class="text-light">Unfinished tasks</h2>
             <p>
             <ul>
                 {% for todo in todo %}
                     {% if todo.status == False  and todo.user_id == current_user.id %}
-                    <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"><h3 class="text-light"> {{ todo.description }}</h3>
-                        {{todo.content}}
-                        <br>
-                        {{ todo.deadline }}
-                    <a href="{{ url_for('complete', id = todo.id )}}">Complete</a>
-                    <!-- <button type ="button" data-toggle ='modal', data-target=#deleteModal>Delete</button> -->
-                    <a href="{{ url_for('delete', id = todo.id )}}">Delete</a>
-                    <a href="{{ url_for('edit', id = todo.id )}}">Edit</a></li>
+                    <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none">
+
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse{{todo.id}}">
+                                            <h3 class="text-light">{{ todo.id}} -{{ todo.description }}</h3></a>
+                                    </h4>
+                                    {{todo.content}}
+                                    <br>
+                                    {{ todo.deadline }}
+                                </div>
+
+                                <div id="collapse{{todo.id}}" class="panel-collapse collapse">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><a href="{{ url_for('complete', id = todo.id )}}"><i class="material-icons">
+                                            check
+                                        </i></a></li>
+                                        <li class="list-group-item"><a href="{{ url_for('delete', id = todo.id )}}"><i class="material-icons">
+                                            delete
+                                        </i></a></li>
+                                        <li class="list-group-item"><a href="{{ url_for('edit', id = todo.id )}}"><i class="material-icons">
+                                            edit
+                                        </i></a></li>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
 
                 {% endfor %}
+            
+            
             </ul>
             </p>
         </div>
-        <div class="col-md-6 text-center">
+
+
+
+
+        <div class="col-md-4 text-center">
              <h2 class="text-light">Finished tasks</h2>
             <p>
                 {% for todo in todo %}
                 {% if todo.status == True and todo.user_id == current_user.id  %}
-                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"><h3 class="text-light"> {{ todo.description }} </h3> - {{todo.timestamp}}
-                <a href="/delete/{{todo.id }}">Delete</a></li>
+                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"><h3 class="text-light"> {{ todo.description }} </h3>  {{todo.deadline.date()}}
+                <a class="close" href="/delete/{{ todo.id }}"> <i class="material-icons">
+                        delete
+                    </i></li>
                 {% endif %}
                 {% endfor %}
 
             </p>
         </div>
-    </div>
 
-    <div class="col-md-6 text-center">
-        <h2 class="text-light"> New List</h2>
+    <div class="col-md-4 text-center">
+        <div id="faq" role="tablist" aria-multiselectable="true"></div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="questionOne">
+                <h5 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#faq" href="#answerOne" aria-expanded="false"
+                        aria-controls="answerOne">
+                       <h2 class="text-light"> New List</h2>
+                    </a>
+                </h5>
+            </div>
+            <div id="answerOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionOne">
+                <div class="panel-body">
+
+                    <form action="" method="post" name="newlist">
+                        
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name ="name" placeholder="Description's list" aria-label="Content"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" >Button</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+        
         <p>
             <ul>
                 {% for newlist in newlist %}
-                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none"> {{ newlist.name }}</li>
+                {% if newlist.user_id == current_user.id  %}
+                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none">{{ newlist.name }} 
+                <a  class="close" href="/deleteList/{{ newlist.id }}"> <i class="material-icons">
+                    delete
+                </i> 
+                </li>
+                {% endif %}
+
                 {% endfor %}
             </ul>
         </p>
+    
     </div>
-    </div>
 
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<!-- </body>
-
-</html> -->
-
+</body>
 
 {% endblock %}
 

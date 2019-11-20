@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
+<body class="main">
 	<h1>Schedule your task here!</h1>
 	<br><br>
-		<form action="" method="post" name="add" class='main'>
+		<form action="" method="post" name="add" >
 			{{ form.hidden_tag() }}
             <legend>{{ legend }} </legend>
 			{% if legend ==  'Edit Tasks' %}
@@ -37,5 +38,6 @@
 					<br><br><br>
 				</div>
 		</form>
+</body>
 {% endblock content %}
 

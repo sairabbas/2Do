@@ -1,41 +1,43 @@
 {% extends 'layout.html' %} {% block content %}
-<h2>Sign in</h2>
-<br /><br />
-<form action="" method="post" name="signin">
-  {{ form.hidden_tag() }}
-  <div class="form-group">
-    {{ form.username.label(class="form-control-label word")}} {{
-    form.username(class="form-control form-control-lg")}} {% for error in
-    form.username.errors %}
-    <span class="errorSISU">{{ error }}</span>
-    {% endfor %}
-  </div>
+<body class="main">
+  <h2>Sign in</h2>
   <br /><br />
-  <div class="form-group">
-    {{form.password.label(class="form-control-label word")}} {{
-    form.password(class="form-control form-control-lg")}} {% for error in
-    form.password.errors %}
-    <span class="errorSISU">{{ error }}</span>
-    {% endfor %}
-  </div>
-  <br /><br />
-  <div class="form-check">
-    {{ form.remember_me(class="form-check-input ")}} {{
-    form.remember_me.label(class="form-check-label word")}}
-  </div>
-  <div>
+  <form action="" method="post" name="signin">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.username.label(class="form-control-label word")}} {{
+      form.username(class="form-control form-control-lg")}} {% for error in
+      form.username.errors %}
+      <span class="errorSISU">{{ error }}</span>
+      {% endfor %}
+    </div>
     <br /><br />
-    {{form.submit(class="btn btn-outline-info")}}
-    <br /><br /><br />
+    <div class="form-group">
+      {{form.password.label(class="form-control-label word")}} {{
+      form.password(class="form-control form-control-lg")}} {% for error in
+      form.password.errors %}
+      <span class="errorSISU">{{ error }}</span>
+      {% endfor %}
+    </div>
+    <br /><br />
+    <div class="form-check">
+      {{ form.remember_me(class="form-check-input ")}} {{
+      form.remember_me.label(class="form-check-label word")}}
+    </div>
+    <div>
+      <br /><br />
+      {{form.submit(class="btn btn-outline-info")}}
+      <br /><br /><br />
+    </div>
+    <small class="text-muted ml-2">
+      <a href="#">Forgot Password</a>
+    </small>
+  </form>
+  <div class="border-top pt-3">
+    <small class=" word"
+      >No account?
+      <a class="ml-2" href="{{ url_for('signUp') }}">Sign Up Now</a></small
+    >
   </div>
-  <small class="text-muted ml-2">
-    <a href="#">Forgot Password</a>
-  </small>
-</form>
-<div class="border-top pt-3">
-  <small class=" word"
-    >No account?
-    <a class="ml-2" href="{{ url_for('signUp') }}">Sign Up Now</a></small
-  >
-</div>
+</body>
 {% endblock content %}
