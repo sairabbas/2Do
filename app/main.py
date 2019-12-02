@@ -10,6 +10,7 @@ from datetime import datetime
 
 # to convert pdf
 import pdfkit
+
 config = pdfkit.configuration(
     wkhtmltopdf="C:\\Program Files (x86)\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
 )
@@ -36,7 +37,10 @@ def home():
     todo = Todo.query.all()
     newlist = newList.query.all()
     return render_template("home.html", newlist=newlist, todo=todo, title="HOME")
+
+
 # ________________________________________________________________________________________
+
 
 @app.route("/login")
 @app.route("/login", methods=["GET", "POST"])
@@ -54,9 +58,10 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
-            next_page = url_for("home")
-        return redirect(next_page)
+            flash(f"Account successfully created for {form.username.data}!", "success")
+        return redirect(url_for("home"))
     return render_template("signin.html", title="Sign In", form=form)
+
 
 # ________________________________________________________________________________________
 @app.route("/logout")
@@ -82,6 +87,7 @@ def signUp():
         return redirect(url_for("login"))
     return render_template("register.html", form=form, title="Sign Up")
 
+
 # ________________________________________________________________________________________
 # Error handler
 @app.errorhandler(404)
@@ -93,6 +99,7 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()  # all objects are expired
     return render_template("500.html"), 500
+
 
 # ________________________________________________________________________________________
 # list page
@@ -110,6 +117,7 @@ def newlist():
         return redirect("home")
 
     return render_template("home.html", title="HOME")
+
 
 # ________________________________________________________________________________________
 # add tasks
@@ -142,6 +150,7 @@ def add():
         # posts = Todo.query.order_by(Todo.timestamp.desc()).all()
     return render_template("tasks.html", form=form, legend="New Tasks", title="add")
 
+
 # ________________________________________________________________________________________
 # complete tasks
 @app.route("/complete/<int:id>")
@@ -152,6 +161,7 @@ def complete(id):
     todo.status = True
     db.session.commit()
     return redirect(url_for("home"))
+
 
 # ________________________________________________________________________________________
 # delete tasks
@@ -171,6 +181,7 @@ def deleteList(id):
     db.session.delete(newlist)
     db.session.commit()
     return redirect(url_for("home"))
+
 
 # ________________________________________________________________________________________
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
@@ -193,6 +204,7 @@ def edit(id):
         "tasks.html", title="Edit", legend="Edit Tasks", u=u, form=form, todo=todo
     )
 
+
 # ________________________________________________________________________________________
 @app.route("/profile/<string:username>")
 @login_required
@@ -202,6 +214,7 @@ def info(username):
     return render_template(
         "profile.html", title="Profile", todo=todo, yourInfo=yourInfo
     )
+
 
 # ________________________________________________________________________________________
 @app.route("/contact", methods=["GET", "POST"])
@@ -230,6 +243,7 @@ def contact():
 
     return render_template("contact.html", form=form)
 
+
 # ________________________________________________________________________________________
 @app.route("/yourshare", methods=["GET", "POST"])
 @login_required
@@ -250,6 +264,7 @@ def share():
         flash("Sent successfully", "success")
         return redirect(url_for("home"))
     return render_template("shareform.html", form=form)
+
 
 # ________________________________________________________________________________________
 @app.route("/pdf")
