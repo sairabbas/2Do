@@ -1,3 +1,6 @@
+.errorSISU {
+  color: red;
+}
 /* for the layout */
 * {
   margin: 0;
@@ -13,10 +16,10 @@
   background: black;
   color: white;
 }
-body{
+body {
   position: relative;
   background: url("images/black-background-bulb-close-up-716398.jpg");
-  background-size: 100% 200%;
+  background-size: 200%;
   background-repeat: no-repeat;
 }
 .main {
@@ -40,5 +43,33 @@ h2 {
 }
 .close:hover {
   background: black;
+  color: white;
+}
+/* for the tasks.html */
+.customtime {
+  width: 100%;
+  height: 100%; /* optional change it to your height */
+  padding: 15px;
+  background: transparent;
+  color: #fff;
+  border-radius: 5px;
+}
+.buttonsave {
+  background: transparent;
+  color: #fff;
+  padding: 11px 11px;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.buttonsave:hover {
+  background-color: red;
+}
+/* for the profile.html */
+.custominfo {
+  background: transparent;
+  background-color: transparent;
   color: white;
 }

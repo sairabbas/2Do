@@ -16,7 +16,7 @@ class register(FlaskForm):
     username = StringField(
         "Username", validators=[DataRequired(), Length(min=4, max=10)]
     )
-    email = EmailField('Email address', [validators.DataRequired(), validators.Email()])
+    email = EmailField('Email address', validators=[DataRequired(), validators.Length(min=6, max=35)])
     password = PasswordField("Password", validators=[
                              DataRequired(), Length(min=8)])
     confirm_password = PasswordField(
@@ -49,3 +49,18 @@ class createTask(FlaskForm):
 class createList(FlaskForm):
     name = StringField("name",validators=[DataRequired()])
     submit = SubmitField('save')
+
+class contactForm(FlaskForm): 
+    name=  StringField("Name", validators=[DataRequired(), Length(min=4)])
+    email = EmailField('Email address', validators=[DataRequired(), validators.Length(min=6, max=35)])
+    subject= StringField("Subject")
+    message = TextAreaField('message', validators=[DataRequired(), Length(min=4)])
+    submit = SubmitField('send')
+
+class shareForm(FlaskForm): 
+    subject= StringField("Subject")
+    message = TextAreaField('message', validators=[Length(min=4)])
+    nameSender=  StringField("NameSender", validators=[DataRequired(), Length(min=4)])
+    nameReceiver=  StringField("NameReceiver", validators=[DataRequired(), Length(min=4)])
+    emailReceiver = EmailField(' emailReceiver', validators=[DataRequired(), validators.Length(min=6, max=35)])
+    submit = SubmitField('send')

@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="main">
+  <h1 class="text-light">CONTACT</h1>
+  <br>
+   
+  <form action="{{ url_for('contact') }}" method="post" name="contact">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <input type="text" class="form-control customtime" name="name" placeholder="Your Name" required>
+        <br><br>
+        <input type="email" class="form-control customtime" name="email" placeholder="Your Email" value ="{{current_user.email}}" required>
+        <br><br>
+        <input type="text" class="form-control customtime" name="subject" placeholder="Your Subject">
+        <br><br>
+        <textarea class='customtime' name="message" placeholder="Message" contenteditable="true"></textarea>
+        <br><br>
+        <button class="btn btn-outline-dark buttonsave"> Send</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

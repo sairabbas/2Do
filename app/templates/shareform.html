@@ -1,0 +1,24 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="main">
+    <h1 class="text-light">SHARE</h1>
+    <br><br>
+
+    <form action="{{ url_for('share') }}" method="post" name="sharing">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <input type="text" class="form-control customtime" name="subject" placeholder="Subject" required>
+            <br><br>
+            <input type="text" class="form-control customtime" name="nameSender" placeholder="Your Name" required>
+            <br><br>
+            <input type="text" class="form-control customtime" name="nameReceiver" placeholder="Your friend's name" required>
+            <br><br>
+            <input type="email" class="form-control customtime" name="emailReceiver" placeholder="Your friend's  Email" required>
+            <br><br>
+            <textarea class='customtime' name="message" placeholder="Message" contenteditable="true"></textarea>
+            <br><br>
+            <button class="btn btn-outline-dark buttonsave"> Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

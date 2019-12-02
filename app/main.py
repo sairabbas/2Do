@@ -1,13 +1,34 @@
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, make_response
 from app import app, db
-from app.form import signin, register, createTask, createList
+from app.form import signin, register, createTask, createList, contactForm, shareForm
 from flask_login import logout_user
 from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
 from app.models import User, Todo, newList
 from app.function import transformForm
+from datetime import datetime
+
+# to convert pdf
+import pdfkit
+config = pdfkit.configuration(
+    wkhtmltopdf="C:\\Program Files (x86)\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
+)
+# ________________________________________________________________________________________
+# for sending mail
+from flask_mail import Message, Mail
 
 
+# ________________________________________________________________________________________
+mail = Mail()
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_USERNAME"] = "2dowebsite2do@gmail.com"
+app.config["MAIL_PASSWORD"] = "2dowebsite"
+
+mail.init_app(app)
+
+# ________________________________________________________________________________________
 @app.route("/")
 @app.route("/home")
 @login_required
@@ -15,7 +36,7 @@ def home():
     todo = Todo.query.all()
     newlist = newList.query.all()
     return render_template("home.html", newlist=newlist, todo=todo, title="HOME")
-
+# ________________________________________________________________________________________
 
 @app.route("/login")
 @app.route("/login", methods=["GET", "POST"])
@@ -37,7 +58,7 @@ def login():
         return redirect(next_page)
     return render_template("signin.html", title="Sign In", form=form)
 
-
+# ________________________________________________________________________________________
 @app.route("/logout")
 def logout():
     logout_user()
@@ -61,7 +82,7 @@ def signUp():
         return redirect(url_for("login"))
     return render_template("register.html", form=form, title="Sign Up")
 
-
+# ________________________________________________________________________________________
 # Error handler
 @app.errorhandler(404)
 def not_found_error(error):
@@ -73,7 +94,7 @@ def internal_error(error):
     db.session.rollback()  # all objects are expired
     return render_template("500.html"), 500
 
-
+# ________________________________________________________________________________________
 # list page
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
@@ -90,7 +111,7 @@ def newlist():
 
     return render_template("home.html", title="HOME")
 
-
+# ________________________________________________________________________________________
 # add tasks
 @app.route("/add", methods=["GET", "POST"])
 @login_required
@@ -121,17 +142,18 @@ def add():
         # posts = Todo.query.order_by(Todo.timestamp.desc()).all()
     return render_template("tasks.html", form=form, legend="New Tasks", title="add")
 
-
+# ________________________________________________________________________________________
 # complete tasks
 @app.route("/complete/<int:id>")
 @login_required
 def complete(id):
     todo = Todo.query.filter_by(id=id).first()
+    todoCheck = Todo.query.all()
     todo.status = True
     db.session.commit()
     return redirect(url_for("home"))
 
-
+# ________________________________________________________________________________________
 # delete tasks
 @app.route("/delete/<int:id>")
 @login_required
@@ -150,7 +172,7 @@ def deleteList(id):
     db.session.commit()
     return redirect(url_for("home"))
 
-
+# ________________________________________________________________________________________
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 @login_required
 def edit(id):
@@ -171,7 +193,76 @@ def edit(id):
         "tasks.html", title="Edit", legend="Edit Tasks", u=u, form=form, todo=todo
     )
 
+# ________________________________________________________________________________________
+@app.route("/profile/<string:username>")
+@login_required
+def info(username):
+    yourInfo = User.query.filter_by(username=username).first_or_404()
+    todo = Todo.query.all()
+    return render_template(
+        "profile.html", title="Profile", todo=todo, yourInfo=yourInfo
+    )
+
+# ________________________________________________________________________________________
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    form = contactForm()
+    if request.method == "POST":
+        msg = Message(
+            form.subject.data,
+            sender=form.email.data,
+            recipients=["2dowebsite2do@gmail.com"],
+        )
+        msg.body = """
+            Customer: 
+                Name: %s  
+                Email:  %s 
+                Message: %s 
+            """ % (
+            form.name.data,
+            form.email.data,
+            form.message.data,
+        )
+        # msg.attachments(home.html.pdf)
+        mail.send(msg)
+        flash("Thank you for your message. We'll get back to you shortly.", "success")
+        return redirect(url_for("home"))
+
+    return render_template("contact.html", form=form)
+
+# ________________________________________________________________________________________
+@app.route("/yourshare", methods=["GET", "POST"])
+@login_required
+def share():
+    form = shareForm()
+    todo = Todo.query.all()
+    if request.method == "POST":
+        msg = Message(
+            form.subject.data,
+            sender="2dowebsite2do@gmail.com",
+            recipients=[form.emailReceiver.data],
+        )
+        msg.body = """
+        2DO SHARING
+            """
+        msg.html = render_template("mail.html", form=form, todo=todo, title="HOME")
+        mail.send(msg)
+        flash("Sent successfully", "success")
+        return redirect(url_for("home"))
+    return render_template("shareform.html", form=form)
+
+# ________________________________________________________________________________________
+@app.route("/pdf")
+def pdf():
+    form = shareForm()
+    todo = Todo.query.all()
+    rendered = render_template("mail.html", form=form, todo=todo)
+    pdf = pdfkit.from_string(rendered, False, configuration=config)
+    response = make_response(pdf)
+    response.headers["Content-Type"] = "application/pdf"
+    response.headers["Content-Disposition"] = "inline; filename=2do.pdf"
+    return response
+
 
 if __name__ == "__main__":
-    db.create_all()
     app.run(debug=True)

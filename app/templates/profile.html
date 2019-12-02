@@ -1,0 +1,62 @@
+{% extends 'layout.html' %} {% block content %}
+
+<div class="main">
+  <br><br>
+  <div class="card mb-3  custominfo" style="max-width: 1000px;">
+    <div class="row no-gutters">
+        <div class="card-body">
+          <h5 class="card-title">Your Info</h5>
+          <p class="card-text">
+          <table class=" table table-dark">
+            <tbody>
+              <tr>
+                <td>Username</td>
+                <td>{{yourInfo.username}}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{yourInfo.email}}</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          </p>
+        </div>
+      </div>
+
+     
+      <div class="card mb-3  custominfo" style="max-width: 1000px;">
+        <div class="row no-gutters">
+          <div class="card-body">
+            <h5 class="card-title"> History</h5>
+            <p class="card-text">
+              <table class=" table table-dark">
+                <tbody>
+                  <tr>
+                    <td>Description</td>
+                    <td>Deadline</td>
+                  </tr>
+                
+                  {% for i in todo %}
+                  {% if i.status == True and i.user_id == current_user.id  %}
+          
+                  <tr>
+                    <td>{{i.description }}</td>
+                    <td>{{i.deadline.date()}} <a class="close" href="/delete/{{ i.id }}"> <i class="material-icons">
+                        delete
+                      </i></a></td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </p>
+        </div>
+        
+      </div>
+     
+      
+
+ 
+
+{% endblock content %}
