@@ -8,12 +8,7 @@ from app.models import User, Todo, newList
 from app.function import transformForm
 from datetime import datetime
 
-# to convert pdf
-import pdfkit
 
-config = pdfkit.configuration(
-    wkhtmltopdf="C:\\Program Files (x86)\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
-)
 # ________________________________________________________________________________________
 # for sending mail
 from flask_mail import Message, Mail
@@ -267,16 +262,16 @@ def share():
 
 
 # ________________________________________________________________________________________
-@app.route("/pdf")
-def pdf():
-    form = shareForm()
-    todo = Todo.query.all()
-    rendered = render_template("mail.html", form=form, todo=todo)
-    pdf = pdfkit.from_string(rendered, False, configuration=config)
-    response = make_response(pdf)
-    response.headers["Content-Type"] = "application/pdf"
-    response.headers["Content-Disposition"] = "inline; filename=2do.pdf"
-    return response
+# @app.route("/pdf")
+# def pdf():
+#     form = shareForm()
+#     todo = Todo.query.all()
+#     rendered = render_template("mail.html", form=form, todo=todo)
+#     pdf = pdfkit.from_string(rendered, False, configuration=config)
+#     response = make_response(pdf)
+#     response.headers["Content-Type"] = "application/pdf"
+#     response.headers["Content-Disposition"] = "inline; filename=2do.pdf"
+#     return response
 
 
 if __name__ == "__main__":
