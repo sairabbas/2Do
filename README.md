@@ -5,7 +5,7 @@ Alvin Huang, Anh Le, Hamsika Pongubala, Sair Abbas
 
 ## Heroku Deployment
 
-https://two2do.herokuapp.com/login?next=%2F
+https://two2do.herokuapp.com
 
 ## Testing
 
