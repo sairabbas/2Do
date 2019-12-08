@@ -3,6 +3,17 @@
 # 2Do by Team 9
 Alvin Huang, Anh Le, Hamsika Pongubala, Sair Abbas
 
+## Heroku Deployment
+
+https://two2do.herokuapp.com/login?next=%2F
+
+## Testing
+
+Test cases were implemented using pytest. Running the following file will run the test cases.
+
+CMPE131/tests/test_basic.py
+
+
 ## About the App:
 
 2Do is a task management application, which will allow users to manage their daily task with ease. The app will allow users to enter their daily tasks, set notification timings, create new to do lists, and share their tasks with other 2Do users! Our hope is that managing your daily schedule becomes easier.
