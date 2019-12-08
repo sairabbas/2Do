@@ -1,31 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-<script type="text/javascript">
-    function selectAll() {
-        var items = document.getElementsByName('Check');
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].type == 'checkbox')
-                items[i].checked = true;
-        }
-    }
-
-    function UnSelectAll() {
-        var items = document.getElementsByName('Check');
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].type == 'checkbox')
-                items[i].checked = false;
-        }
-    }
-</script>
 <body  class="mainHome">
     <br>
     <div class="row ">
         <!-- Bootstrap grid is 12 units in total, here i'm splitting one row into 2 columns of 6 units each -->
         <!-- Imagine it like this: |  6 units |  6 units | -->
-        <div class="col-md-4">
+        <div class="col">
             <h2 class="text-light text-center">Unfinished tasks</h2>
             <br>
-            <p>
             <ul>
                 {% for todo in todo %}
                     {% if todo.status == False  and todo.user_id == current_user.id %}
@@ -66,39 +48,20 @@
                 {% endfor %}
 
 
-            </ul>
-            </p>
+            </ul> 
         </div>
 
 
-        <div class="col-md-4 text-center">
+        <div class="col text-center">
 
-            <h2 class="text-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false"
-                aria-controls="multiCollapseExample1">List</h2>
-
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-            <div class=" card-body">
-
-                <form  action="{{ url_for('newlist') }}" method="post" name="home">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control customtime" name="name" placeholder="Description's list" aria-label="Content"
-                            aria-describedby="basic-addon2" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary">Button</button>
-                        </div>
-                    </div>
-                </form>
-
-                </div>
-            </div>
-
-            <p>
+            <h2 class="text-light">Finished Tasks</h2>
+<br>
             <ul>
-                {% for newlist in newlist %}
-                {% if newlist.user_id == current_user.id  %}
+                {% for todo in todo %}
+                {% if todo.user_id == current_user.id  and todo.status == True %}
 
-                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none">{{ newlist.name }}
-                    <a class="close" href="/deleteList/{{ newlist.id }}"> <i class="material-icons">
+                <li class="p-3 mb-2 bg-dark text-white" style="list-style-type:none">{{ todo.description }}
+                    <a class="close" href="/delete/{{ todo.id }}"> <i class="material-icons">
                             delete
                         </i> </a>
                 </li>
@@ -106,50 +69,8 @@
 
                 {% endfor %}
             </ul>
-            </p>
-
-        </div>
-
-        <div class="col-md-4 text-center">
-
-            <h2 class="text-light" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false"
-                aria-controls="multiCollapseExample2">Share</h2>
-
-            <div class="collapse multi-collapse" id="multiCollapseExample2">
-                <div class=" card-body">
-                    <form action="{{ url_for('share') }}" method="post" name="sharing">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control customtime" name="emailReceiver" placeholder="Email"
-                                aria-label="Content" aria-describedby="basic-addon2" required>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary">Send</button>
-                            </div>
-
-                            <input class="btn btn-outline-secondary"type="button" onclick='selectAll()' value="Select All" />
-                            <input class="btn btn-outline-secondary"type="button" onclick='UnSelectAll()' value="Unselect All" />
-                        </div>
-                        <div class='text-white'>
-                            <ul class="tc">
-                        {% for todo in todo %}
-                        {% if todo.status == False  and todo.user_id == current_user.id %}
-                              <li class="tc">
-                                <input type="checkbox" id={{todo.id}} name="Check" value={{todo.id}}>
-                                <label for={{todo.id}}>{{todo.description}}</label>
-                              </li>
-
-                        {% endif%}
-                        {% endfor %}
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-
-
-
     </div>
+</div>
 
 </body>
 

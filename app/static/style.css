@@ -72,22 +72,18 @@ h2 {
   color: white;
 }
 
-
-
-
-
-input[type=checkbox] + label {
+input[type="checkbox"] + label {
   display: block;
   margin: 0.2em;
   cursor: pointer;
   padding: 0.2em;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   display: none;
 }
 
-input[type=checkbox] + label:before {
+input[type="checkbox"] + label:before {
   content: "\2714";
   border: 0.1em solid #000;
   border-radius: 0.2em;
@@ -99,27 +95,32 @@ input[type=checkbox] + label:before {
   margin-right: 0.2em;
   vertical-align: bottom;
   color: transparent;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-
-input[type=checkbox]:checked + label:before {
+input[type="checkbox"]:checked + label:before {
   background-color: MediumSeaGreen;
   border-color: MediumSeaGreen;
   color: #fff;
 }
 
-
 .tc {
- list-style: none;
- padding-right: 50px;
- display: table-row;
-
+  list-style: none;
+  padding-right: 50px;
+  display: table-row;
 }
 
-#checkbox{
-color:#FBCEB1;
-font-size: 1em;
-text-transform: uppercase;
-margin-left: 5px
+#checkbox {
+  color: #fbceb1;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-left: 5px;
+}
+
+.shareCustom {
+  color: beige;
+  font-style: bold;
+}
+.shareCustom:hover {
+  color: aqua;
 }

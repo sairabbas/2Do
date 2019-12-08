@@ -98,19 +98,19 @@ def internal_error(error):
 
 # ________________________________________________________________________________________
 # list page
-@app.route("/list", methods=["GET", "POST"])
-@login_required
-def newlist():
-    form = createList()
-    if request.method == "POST":
-        name = request.form.get("name")
-        newname = newList(name=name, user=current_user._get_current_object())
-        db.session.add(newname)
-        db.session.commit()
-        flash("List successfully created!", "success")
-        return redirect("home")
+# @app.route("/list", methods=["GET", "POST"])
+# @login_required
+# def newlist():
+#     form = createList()
+#     if request.method == "POST":
+#         name = request.form.get("name")
+#         newname = newList(name=name, user=current_user._get_current_object())
+#         db.session.add(newname)
+#         db.session.commit()
+#         flash("List successfully created!", "success")
+#         return redirect("home")
 
-    return render_template("home.html", title="HOME")
+#     return render_template("home.html", title="HOME")
 
 
 # ________________________________________________________________________________________
@@ -168,13 +168,13 @@ def delete(id):
     return redirect(url_for("home"))
 
 
-@app.route("/deleteList/<int:id>")
-@login_required
-def deleteList(id):
-    newlist = newList.query.filter_by(id=id).first()
-    db.session.delete(newlist)
-    db.session.commit()
-    return redirect(url_for("home"))
+# @app.route("/deleteList/<int:id>")
+# @login_required
+# def deleteList(id):
+#     newlist = newList.query.filter_by(id=id).first()
+#     db.session.delete(newlist)
+#     db.session.commit()
+#     return redirect(url_for("home"))
 
 
 # ________________________________________________________________________________________
@@ -283,7 +283,7 @@ def share():
         sttShareFalse(check)
         flash("Sent successfully", "success")
         return redirect(url_for('home'))
-    return render_template("home.html", form=form, todo=todo)
+    return render_template("shareForm.html", form=form, todo=todo)
 
 
 

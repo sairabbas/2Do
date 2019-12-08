@@ -48,36 +48,47 @@ class UserViewsTests(BaseTestCase):
             follow_redirects=True,
         )
         response = self.client.post(
-            "/add",
+            "/edit/1",
             data=dict(
-                description="test1", content="test1", deadline="12/12/2019 12:12 AM"
+                description="test2", content="test2", deadline="12/12/2019 12:12 AM"
             ),
             follow_redirects=True,
         )
         self.assertEqual(response.status_code, 200)
 
-    # test new list function
-    def test_newList(self):
+    def test_finish(self):
         response = self.client.post(
             "/login",
             data=dict(username="admin1", password="admin2do"),
             follow_redirects=True,
         )
         response = self.client.post(
-            "/list", data=dict(name="test1"), follow_redirects=True,
+            "/edit/1", data=dict(status=True), follow_redirects=True,
         )
         self.assertEqual(response.status_code, 200)
 
-    def test_newListWithoutInput(self):
+    def test_share(self):
         response = self.client.post(
-            "/homne",
+            "/login",
             data=dict(username="admin1", password="admin2do"),
             follow_redirects=True,
         )
         response = self.client.post(
-            "/list", data=dict(name=None), follow_redirects=True,
+            "/sharing",
+            data=dict(emailReceiver="2dowebsite2do@gmail.com", check=[1]),
+            follow_redirects=True,
         )
         self.assertEqual(response.status_code, 200)
+
+    # test profile function
+    def test_profile(self):
+        response = self.client.post(
+            "/login",
+            data=dict(username="admin1", password="admin2do"),
+            follow_redirects=True,
+        )
+        response = self.client.get("/profile/admin1", content_type="html")
+        self.assertEqual(response.status_code, 302)
 
     # test contact function
     def test_contact(self):

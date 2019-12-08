@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block content %}
+<script type="text/javascript">
+    function selectAll() {
+        var items = document.getElementsByName('Check');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = true;
+        }
+    }
+
+    function UnSelectAll() {
+        var items = document.getElementsByName('Check');
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].type == 'checkbox')
+                items[i].checked = false;
+        }
+    }
+</script>
+<body class="mainHome">
+    <div class="text-center">
+    
+        <h2  class="shareCustom" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false"
+            aria-controls="multiCollapseExample2" >Share</h2>
+    
+        <div class="collapse multi-collapse" id="multiCollapseExample2">
+
+            <div class=" card-body">
+
+                <form action="{{ url_for('share') }}" method="post" name="sharing">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control customtime" name="emailReceiver" placeholder="Email's Receiver"
+                            aria-label="Content" aria-describedby="basic-addon2" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary">Send</button>
+                        </div>
+    
+                       
+                    </div>
+        </div>
+    
+    </div>
+    
+    <input class="btn btn-outline-secondary" type="button" onclick='selectAll()' value="Select All" />
+    <input class="btn btn-outline-secondary" type="button" onclick='UnSelectAll()' value="Unselect All" />
+    <div class='text-white'>
+        <ul class="tc">
+            {% for todo in todo %}
+            {% if todo.status == False  and todo.user_id == current_user.id %}
+            <li class="tc p-3 mb-2 text-center">
+                <input type="checkbox" id={{todo.id}} name="Check" value={{todo.id}}>
+                <label for={{todo.id}} id="checkbox">{{ todo.description }} <br> <p style="font-style: italic;">{{ todo.deadline.strftime("Date: %b-%d-%Y") }}</p></label>
+            </li>
+    
+            {% endif%}
+            {% endfor %}
+        </ul>
+    </div>
+    </form>
+    </div>
+    
+    </div>
+</body>
+{% endblock %}

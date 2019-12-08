@@ -1,0 +1,119 @@
+Alvin (7):
+      added CreateTask
+      added CreateTask
+      added CreateTask template
+      added url options
+      fixed a variable error
+      Merge https://github.com/hamsikapongubala/CMPE131
+      changed a few words
+
+AnhMinhHoangLe (42):
+      sign in
+      update register, sign in and comments TODO next
+      fixing newFolder and adding css by Bootstrap
+      new file
+      login logout register edit create delete completed status
+      look at time and log in db
+      fixed all bug
+      new DB, Fixed bugs
+      trial
+      Merge branch 'master' of https://github.com/hamsikapongubala/CMPE131
+      html sigin in page, add content of a task to db, edit and addTask function
+      uploading pictures
+      design sigin page - not work yet
+      udating the style.css
+      changes the layout background and so on
+      update the content of task  in the DB
+      adding the content element of the task to edit and creat new task
+      edit and creat task form of content
+      update the new images folder
+      re-design the css and bootstrap to the layout
+      update the signin.html
+      update register.html
+      new CSS
+      update the new db
+      Merge branch 'master' into AnhLe
+      update css
+      venv and merge
+      fixing newlist function and the background styling
+      List and styling
+      share, contact, mail
+      pytest 9 features
+      update flask_tetsing
+      flask_testing
+      update txt
+      update txt
+      update txt
+      update txt
+      update txt
+      update
+      heroku
+      final version
+      pytest
+
+Hamsika Pongubala (19):
+      Create README.md
+      Delete .travis.yml
+      Create .travis.yml
+      Delete requirements.tx
+      Update README.md
+      Create test_main.py
+      Update .travis.yml
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+      Update README.md
+
+Jhyo (1):
+      Add files via upload
+
+clear (5):
+      Removed extra comma in compiling error
+      Changed Mail to Email
+      Fixed compiling error of signin
+      Fixed compiling error of register
+      Changed wording in success messages
+
+hamsikapongubala (8):
+      Committing small changes
+      Adding DB
+      Adding split view
+      adding requirements.txt
+      Merge branch 'master' of github.com:hamsikapongubala/CMPE131
+      adding requirements
+      adding new list page
+      Adding some styling changes
+
+mhyo4125 (23):
+      added .travis.yml requires repo master to setup travis
+      changed a few words
+      changed email validation
+      changed email error message
+      fixed email validation
+      refreshed db
+      minor word changes
+      minor changes
+      Merge https://github.com/hamsikapongubala/CMPE131
+      no changes
+      Merge https://github.com/hamsikapongubala/CMPE131 into Alvin
+      minor changes
+      Merge https://github.com/hamsikapongubala/CMPE131
+      fixed code conlfict
+      minor changes
+      some changes
+      Merge branch 'master' into Alvin
+      data created
+      made an acc
+      add addList to nav bar
+      data changes
+      Merge branch 'master' into Alvin
+      typo fix
+
