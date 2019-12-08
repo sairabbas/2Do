@@ -64,7 +64,7 @@ class UserViewsTests(BaseTestCase):
             follow_redirects=True,
         )
         response = self.client.post(
-            "/home", data=dict(name="test1"), follow_redirects=True,
+            "/list", data=dict(name="test1"), follow_redirects=True,
         )
         self.assertEqual(response.status_code, 200)
 
@@ -75,7 +75,7 @@ class UserViewsTests(BaseTestCase):
             follow_redirects=True,
         )
         response = self.client.post(
-            "/home", data=dict(name=None), follow_redirects=True,
+            "/list", data=dict(name=None), follow_redirects=True,
         )
         self.assertEqual(response.status_code, 200)
 
