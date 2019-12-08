@@ -5,8 +5,8 @@ from flask_login import logout_user
 from flask_login import login_required, current_user, login_user
 from werkzeug.urls import url_parse
 from app.models import User, Todo, newList
-from app.function import transformForm
-from datetime import datetime
+from app.function import transformForm, HTML2PDF,sttShareFalse
+
 
 
 # ________________________________________________________________________________________
@@ -53,7 +53,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
-            flash(f"Account successfully created for {form.username.data}!", "success")
+            flash(f"Login successfully for {form.username.data}!", "success")
         return redirect(url_for("home"))
     return render_template("signin.html", title="Sign In", form=form)
 
@@ -98,8 +98,7 @@ def internal_error(error):
 
 # ________________________________________________________________________________________
 # list page
-@app.route("/", methods=["GET", "POST"])
-@app.route("/home", methods=["GET", "POST"])
+@app.route("/list", methods=["GET", "POST"])
 @login_required
 def newlist():
     form = createList()
@@ -133,6 +132,7 @@ def add():
             content=content,
             deadline=deadline,
             status=False,
+            statusShare=True,
             user=current_user._get_current_object(),
         )
         db.session.add(todo)
@@ -152,7 +152,6 @@ def add():
 @login_required
 def complete(id):
     todo = Todo.query.filter_by(id=id).first()
-    todoCheck = Todo.query.all()
     todo.status = True
     db.session.commit()
     return redirect(url_for("home"))
@@ -231,7 +230,6 @@ def contact():
             form.email.data,
             form.message.data,
         )
-        # msg.attachments(home.html.pdf)
         mail.send(msg)
         flash("Thank you for your message. We'll get back to you shortly.", "success")
         return redirect(url_for("home"))
@@ -240,38 +238,54 @@ def contact():
 
 
 # ________________________________________________________________________________________
-@app.route("/yourshare", methods=["GET", "POST"])
+@app.route("/sharing", methods=["GET", "POST"])
 @login_required
 def share():
     form = shareForm()
     todo = Todo.query.all()
     if request.method == "POST":
+        emailReceiver= request.form.get("emailReceiver")
+        check = request.form.getlist("Check")
+
+        #change the status of share which the user wants to share
+        for x in check:
+            todo1 = Todo.query.filter_by(id=x).first()
+            todo1.statusShare=True
+        db.session.commit()
+
+        #create the pdf, convert html to pdf
+        rendered = render_template("mail.html", form=form, todo=todo)
+        pdf = HTML2PDF()  # in function.py (class)
+        pdf.add_page()
+        pdf.write_html(rendered)
+        # pdf output, PDF data output as a string
+        response = pdf.output(dest='S')
+
+        #gmail structure
         msg = Message(
-            form.subject.data,
+            "2DO SHARING",
             sender="2dowebsite2do@gmail.com",
-            recipients=[form.emailReceiver.data],
+            recipients=[emailReceiver],
         )
         msg.body = """
         2DO SHARING
             """
-        msg.html = render_template("mail.html", form=form, todo=todo, title="HOME")
+        # for attach the file
+        msg.attach(
+            "2DO",'application/pdf',response)
+
+        #UI for the mail
+        msg.html = rendered
+
+        #Send msg
         mail.send(msg)
+        # recover the share status to False
+        sttShareFalse(check)
         flash("Sent successfully", "success")
-        return redirect(url_for("home"))
-    return render_template("shareform.html", form=form)
+        return redirect(url_for('home'))
+    return render_template("home.html", form=form, todo=todo)
 
 
-# ________________________________________________________________________________________
-# @app.route("/pdf")
-# def pdf():
-#     form = shareForm()
-#     todo = Todo.query.all()
-#     rendered = render_template("mail.html", form=form, todo=todo)
-#     pdf = pdfkit.from_string(rendered, False, configuration=config)
-#     response = make_response(pdf)
-#     response.headers["Content-Type"] = "application/pdf"
-#     response.headers["Content-Disposition"] = "inline; filename=2do.pdf"
-#     return response
 
 
 if __name__ == "__main__":

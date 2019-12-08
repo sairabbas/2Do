@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField,BooleanField, IntegerField,  TextAreaField, DateField, TimeField, validators, DateTimeField
+from wtforms import StringField, PasswordField, SubmitField,BooleanField, IntegerField,  TextAreaField, DateField, TimeField, validators, DateTimeField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Length, ValidationError
 from app.models import User, Todo
 from wtforms.fields.html5 import EmailField
@@ -57,10 +57,12 @@ class contactForm(FlaskForm):
     message = TextAreaField('message', validators=[DataRequired(), Length(min=4)])
     submit = SubmitField('send')
 
-class shareForm(FlaskForm): 
-    subject= StringField("Subject")
-    message = TextAreaField('message', validators=[Length(min=4)])
-    nameSender=  StringField("NameSender", validators=[DataRequired(), Length(min=4)])
-    nameReceiver=  StringField("NameReceiver", validators=[DataRequired(), Length(min=4)])
-    emailReceiver = EmailField(' emailReceiver', validators=[DataRequired(), validators.Length(min=6, max=35)])
+class shareForm(FlaskForm):
+    class shareForm(FlaskForm):
+        emailReceiver = EmailField(
+            "emailReceiver", validators=[DataRequired(), validators.Length(min=6, max=35)]
+        )
+        selectTask = SelectField("Check", validators=[DataRequired()])
+        submit = SubmitField("send")
+
     submit = SubmitField('send')

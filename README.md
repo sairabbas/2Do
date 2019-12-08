@@ -17,6 +17,8 @@ The following features are implemented:
 - [x] User can edit a task
 - [x] User can delete a task
 - [x] User can create a new list
+- [x] User can contact to the admin
+- [x] User can share tasks to others by email
 - [x] Application side the database securely contains user information
 - [x] User interface designed using bootstrap.
 
@@ -70,6 +72,15 @@ On clicking the delete link on an exisiting task, the user can delete the task. 
 ### Create a list
 
 On clicking the create a list tab on the navigation bar, the user will be redirected to a webpage to insert the list title. This allows the user to create a list on the homepage other than the default 'unfinished tasks' and 'finished tasks'.
+
+### Contact
+
+On clicking the contact link on navigation bar, users can contact  the admin of the app to have questions or ideas. In the short time, the customer service will send the reply back to email of  the users. 
+
+### Share
+
+On clicking the share link on navigation bar, users can  share the tasks to others' email. 
+
 
 ### Database
 

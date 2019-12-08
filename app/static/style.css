@@ -1,11 +1,6 @@
 .errorSISU {
   color: red;
 }
-/* for the layout */
-* {
-  margin: 0;
-  padding: 0;
-}
 .navbar-brand {
   font-family: "Sedgwick Ave Display", cursive;
   font-size: 50px;
@@ -18,9 +13,12 @@
 }
 body {
   position: relative;
-  background: url("images/black-background-bulb-close-up-716398.jpg");
-  background-size: 200%;
-  background-repeat: no-repeat;
+  background: url("images/black-background-bulb-close-up-716398.jpg") no-repeat
+    center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .main {
   padding: 10% 20% 30%;
@@ -72,4 +70,56 @@ h2 {
   background: transparent;
   background-color: transparent;
   color: white;
+}
+
+
+
+
+
+input[type=checkbox] + label {
+  display: block;
+  margin: 0.2em;
+  cursor: pointer;
+  padding: 0.2em;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox] + label:before {
+  content: "\2714";
+  border: 0.1em solid #000;
+  border-radius: 0.2em;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  padding-left: 0.2em;
+  padding-bottom: 0.3em;
+  margin-right: 0.2em;
+  vertical-align: bottom;
+  color: transparent;
+  transition: .2s;
+}
+
+
+input[type=checkbox]:checked + label:before {
+  background-color: MediumSeaGreen;
+  border-color: MediumSeaGreen;
+  color: #fff;
+}
+
+
+.tc {
+ list-style: none;
+ padding-right: 50px;
+ display: table-row;
+
+}
+
+#checkbox{
+color:#FBCEB1;
+font-size: 1em;
+text-transform: uppercase;
+margin-left: 5px
 }

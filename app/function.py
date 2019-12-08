@@ -1,5 +1,9 @@
-from datetime import datetime, date, time
+from datetime import datetime
 import calendar, re, datetime
+from fpdf import FPDF, HTMLMixin
+from app import db
+from app.models import Todo
+
 
 # this function for converting the input form of HTML to DB
 def transformForm(deadline):
@@ -22,10 +26,11 @@ def transformForm(deadline):
         int(dict["Y"]), int(dict["M"]), int(dict["D"]), int(dict["H"]), int(dict["Min"])
     )
     return deadline
+class HTML2PDF(FPDF, HTMLMixin):
+    pass
 
-
-def delete(id, a):
-    todo = User.query.filter_by(id=id).first()
-    db.session.delete(todo)
+def sttShareFalse(check):
+    for x in check:
+        todo1 = Todo.query.filter_by(id=x).first()
+        todo1.statusShare = False
     db.session.commit()
-    return redirect(url_for("home"))

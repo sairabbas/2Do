@@ -34,6 +34,8 @@ class Todo(UserMixin, db.Model):
     deadline = db.Column(db.DateTime, index=True, nullable=False)
     # the status of the task finished or not
     status = db.Column(db.Boolean, default=False)
+    # status share
+    statusShare = db.Column(db.Boolean, default=False)
     # linking to the user id
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 

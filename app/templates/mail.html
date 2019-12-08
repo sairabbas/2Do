@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="{{ url_for("static", filename="style.css")}}">
-    
     {% if title %}
-    <title>2DO - {{title}} </title>
+    <title>2DO - {{title}}</title>
     {% else %}
     <title>2DO</title>
-    {% endif  %}
-    </head>
-</head>
-<body>
-    <h1> Welcome to 2DO-SHARING</h1>
-    <p>You have a sharing task from {{form.nameSender.data}}</p>
-    <p>Message: {{form.message.data}}</p>
+    {% endif %}
+  </head>
+  <body  style=" font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;">
+    <h1 style="color:red;  font-style: bold; ">Welcome to 2DO-SHARING</h1>
+    <p style="font-style: italic ;">You have a sharing task from {{current_user.email}}</p>
+    <br><br>
     <table border="1">
-        <tr>
-            <th width="250">Title</th>
-            <th width="150">Content</th>
-            <th width="170">Date Deadline</th>
-            <th width="170">Time Deadline</th>
-
-        </tr>
-        {% for todo in todo %}
-        {% if todo.status == False %}
-        <tr>
-            <td>{{ todo.description }}</td>
-            <td>{{todo.content}}</td>
-            <td>{{ todo.deadline.strftime(" %b-%d-%Y") }}</td>
-            <td>{{ todo.deadline.strftime( " %H:%M")}}</td>
-        </tr>
-        {% endif %}
-        
-        {% endfor %}
+      <tr>
+        <th width="250">Title</th>
+        <th width="150">Content</th>
+        <th width="170">Date Deadline</th>
+        <th width="170">Time Deadline</th>
+      </tr>
+      {% for todo in todo %} {% if todo.statusShare == True and  todo.status == False %}
+      <tr>
+        <td>{{ todo.description }}</td>
+        <td>{{todo.content}}</td>
+        <td>{{ todo.deadline.strftime(" %b-%d-%Y") }}</td>
+        <td>{{ todo.deadline.strftime( " %H:%M")}}</td>
+      </tr>
+      {% endif %} {% endfor %}
     </table>
-    <!-- <p><a href="http://localhost:5000/pdf">Download PDF</a></p> -->
-    
-</body>
+  </body>
 </html>

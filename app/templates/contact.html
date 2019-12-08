@@ -1,9 +1,9 @@
 {% extends "layout.html" %} {% block content %}
 
 <div class="main">
-  <h1 class="text-light">CONTACT</h1>
+  <h1 class="text-light text-center">CONTACT US</h1>
   <br>
-   
+
   <form action="{{ url_for('contact') }}" method="post" name="contact">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -18,5 +18,7 @@
         <button class="btn btn-outline-dark buttonsave"> Send</button>
     </div>
   </form>
+
+
 </div>
 {% endblock %}
