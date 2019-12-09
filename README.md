@@ -13,6 +13,9 @@ Test cases were implemented using pytest. Running the following file will run th
 
 CMPE131/tests/test_basic.py
 
+## Sphinx Documentation
+
+Documentation was created using Sphinx and can be viewed under CMPE131/docs/build/html/index.html
 
 ## About the App:
 
