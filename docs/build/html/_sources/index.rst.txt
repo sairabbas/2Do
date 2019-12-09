@@ -42,7 +42,7 @@ Users can add new tasks, by clicking on the add task from the navigation bar
 
 *Home Page*
 
-New Tasks are added to the To Do List
+New Tasks are added to the Unfinished Task List
 
 .. image:: Home.png
 
@@ -65,13 +65,13 @@ Once the user is done with a task, they can click on the check mark to move the 
 
 *Profile*
 
-Each user has a profile
+Each user has a profile which they can access from the Info in the Navigation Bar.
 
 .. image:: Profile.png
 
 *Share*
 
-Users can share their 2Do lists with friends by email. An email will then be sent containing a PDF of their unfinished tasks.
+Users can share their 2Do lists with friends by email. An email will then be sent containing a PDF of their unfinished tasks. Users must click on the Share header as shown below
 
 .. image:: Share.png
 
